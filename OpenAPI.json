@@ -1,0 +1,463 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "to-do-api",
+    "description": "The API for the ToDo list project",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "return user with such id",
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User don't exist"
+          }
+        }
+      }
+    },
+    "/users/{userId}/tasks": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "return status of all user tasks",
+        "operationId": "getUserTasks",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskStatus"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User don't exist"
+          }
+        }
+      }
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "return status of chosen user task",
+        "operationId": "getUserTask",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User and task exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User or task don't exist"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "successfully update user's task",
+        "operationId": "updateUserTask",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskStatus"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User and task exist"
+          },
+          "404": {
+            "description": "User or task don't exist"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "successfully add task to user",
+        "operationId": "addUserTask",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskStatus"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User and task exist"
+          },
+          "404": {
+            "description": "User or task don't exist"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "successfully delete user's task",
+        "operationId": "deleteUserTask",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User and task exist"
+          },
+          "404": {
+            "description": "User or task don't exist"
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "description": "return task with such id",
+        "operationId": "getTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task exist"
+          },
+          "404": {
+            "description": "Task don't exist"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tasks"
+        ],
+        "operationId": "updateTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeTaskInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successfully update task"
+          },
+          "404": {
+            "description": "Task don't exist"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "operationId": "addTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeTaskInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successfully add task"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tasks"
+        ],
+        "operationId": "deleteTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully delete task"
+          },
+          "404": {
+            "description": "Task don't exist"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Mikhail Kuznetsov"
+          }
+        }
+      },
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "title": {
+            "type": "string",
+            "example": "Finish new contractor test"
+          },
+          "discription": {
+            "type": "string",
+            "example": "Go to company website and finish new contractor test"
+          }
+        }
+      },
+      "TaskStatus": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "status": {
+            "type": "string",
+            "example": "new",
+            "enum": [
+              "new",
+              "in progress",
+              "done"
+            ]
+          }
+        }
+      },
+      "ChangeTaskInfo": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "$ref": "#/components/schemas/Task"
+          },
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        }
+      }
+    }
+  }
+}
